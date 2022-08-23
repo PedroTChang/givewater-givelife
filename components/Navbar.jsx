@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Transition } from "@headlessui/react"; // for smooth transition between tabs
 import { Link } from "react-scroll"; // Alternate for a tag. In Next js we use Link for ref.
 import Image from "next/image";
@@ -6,6 +6,15 @@ import Image from "next/image";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    let handler = ()=>{
+      setIsOpen(false);
+    };
+
+    document.addEventListener("mousedown", handler);
+  })
+
   return (
     <div>
         {/* for Main Navcontainer */}
@@ -89,34 +98,31 @@ export default function Navbar() {
                 {/* here d is the shape code. */}
                 {!isOpen ? (
                   <svg 
-                    className="block h6 w-g" 
-                    xmlns="http:www.w3.org/2000/svg" 
+                    xmlns="http://www.w3.org/2000/svg" 
                     fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="currentColors" 
-                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
                   >
                     <path 
-                      strokeLinecap="round" 
                       strokeLinejoin="round" 
                       strokeWidth="2" 
-                      d="M4 6h16M4 12h16M4 18h16" 
+                      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" 
                     />
                   </svg>
                 ) : ( 
                   <svg 
-                      className="block h6 w-g" 
-                      xmlns="http:www.w3.org/2000/svg" 
-                      fill="none" 
-                      viewBox="0 0 24 24" 
-                      stroke="currentColors" 
-                      aria-hidden="true"
-                    >
-                    <path 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
-                        strokeWidth="2" 
-                        d="M6 18L18 6M6 6l12 12" // for cross shape
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M4.5 19.5l15-15m-15 0l15 15"
                       />
                   </svg>
                 )}
@@ -148,6 +154,51 @@ export default function Navbar() {
                     className="cursor-pointer hover:bg-blue-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   Home
+                </Link>
+              </div>
+              <div
+                ref={ref}
+                className="bg-white px-2 pt-3 pt-2 pb-3 space-y-1 sm:px-3"
+              >
+                <Link href="/about"
+                    activeClass="about"
+                    to="about" 
+                    smooth={true} 
+                    offset={50}
+                    duration={500}
+                    className="cursor-pointer hover:bg-blue-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  About 
+                </Link>
+              </div>
+              <div
+                ref={ref}
+                className="bg-white px-2 pt-3 pt-2 pb-3 space-y-1 sm:px-3"
+              >
+                <Link href="/projects"
+                    activeClass="projects"
+                    to="projects" 
+                    smooth={true} 
+                    offset={50}
+                    duration={500}
+                    className="cursor-pointer hover:bg-blue-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Projects
+                </Link>
+              </div>
+              <div
+                ref={ref}
+                className="bg-white px-2 pt-3 pt-2 pb-3 space-y-1 sm:px-3"
+              >
+                <Link href="/donations"
+                    activeClass="donations"
+                    to="donations" 
+                    smooth={true} 
+                    offset={50}
+                    duration={500}
+                    className="cursor-pointer hover:bg-blue-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  Donations 
                 </Link>
               </div>
             </div>
